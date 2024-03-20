@@ -18,8 +18,8 @@ const cardsContainer = document.querySelectorAll(
   ".cards .cards-wrapper .cards-container"
 );
 const successModal = document.querySelector(".success-wrapper");
-const closeButton = document.querySelector(".closeModal");
-const overlay = document.querySelector(".overlay");
+//const closeButton = document.querySelector(".closeModal");
+//const overlay = document.querySelector(".overlay");
 const arrows = document.querySelectorAll(".game .body .arrow");
 const pauseButton = document.querySelector(".game .pause.icon");
 const iconsArr = [...arrows, pauseButton];
@@ -154,7 +154,7 @@ cardsContainer.forEach((cardItem) => {
     }
   });
 });
-const addCloseAnimation = () => {
+/*const addCloseAnimation = () => {
   closeButton.classList.add("animate");
   closeButton.addEventListener("animationend", () => {
     closeButton.classList.remove("animate");
@@ -174,7 +174,7 @@ document.addEventListener("click", function (event) {
 });
 closeButton.addEventListener("click", () => {
   addCloseAnimation();
-});
+});*/
 const hideItems = () => {
   iconsArr.forEach((item) => {
     item.style.opacity = 0;

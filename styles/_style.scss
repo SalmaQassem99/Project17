@@ -154,9 +154,13 @@ $width-1: 100%;
   visibility: hidden;
   background-size: cover;
   background-position: 50% 100%;
-  &.hide {
-    animation-name: scaleDown;
-    animation-duration: 0.5s;
+  transform-origin: left top;
+
+  &.hideGame {
+    animation-name: hideGame;
+    animation-timing-function: linear;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
     animation-iteration-count: 1;
   }
   .head {
@@ -380,7 +384,7 @@ $width-1: 100%;
       transition: 0.5s;
       z-index: 100;
       visibility: hidden;
-      
+
       .fa-solid {
         filter: drop-shadow(0 0.25rem 0.25rem $shadow-1);
       }
@@ -626,6 +630,9 @@ $width-1: 100%;
     font-size: 3rem;
   }
 }
+.link-address {
+  display: none;
+}
 .success-wrapper {
   width: 60%;
   @extend %fixed-position;
@@ -802,6 +809,16 @@ $width-1: 100%;
 
   100% {
     transform: translateZ(-1px) scaleX(1);
+  }
+}
+
+@keyframes hideGame {
+  0% {
+    transform: scale(1);
+  }
+
+  100% {
+    transform: scale(0);
   }
 }
 
