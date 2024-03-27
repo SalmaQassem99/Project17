@@ -18,8 +18,6 @@ const cardsContainer = document.querySelectorAll(
   ".cards .cards-wrapper .cards-container"
 );
 const successModal = document.querySelector(".success-wrapper");
-//const closeButton = document.querySelector(".closeModal");
-//const overlay = document.querySelector(".overlay");
 const arrows = document.querySelectorAll(".game .body .arrow");
 const pauseButton = document.querySelector(".game .pause.icon");
 const iconsArr = [...arrows, pauseButton];
@@ -82,6 +80,12 @@ playButton.addEventListener("click", () => {
     animateNext(animationCounter);
   });
 });
+pauseButton.addEventListener("click", () => {
+  const hiddenIcon = pauseButton.querySelector("i.hide");
+  const shownIcon = pauseButton.querySelector("i:not(.hide)");
+  hiddenIcon.classList.remove("hide");
+  shownIcon.classList.add("hide");
+});
 textItems.forEach((textItem) => {
   textItem.addEventListener("dragstart", (event) => {
     event.stopPropagation();
@@ -109,7 +113,6 @@ cardsContainer.forEach((cardItem) => {
       `.match-cards .match-card-wrapper .match-card[data-indx="${textIndex}"]`
     );
     if (index === textId) {
-      document.querySelector("#correct-audio").play();
       const textContent = text.textContent;
       counter += 1;
       document.querySelector(
@@ -135,14 +138,19 @@ cardsContainer.forEach((cardItem) => {
         textCounter++;
         animateText(textCounter);
       }
-      if (counter === textItems.length) {
-        const text = document.querySelector(".text-card .score-text");
-        text.textContent = `${counter}/${textItems.length}`;
-        text.setAttribute("text", `${counter}/${textItems.length}`);
-        successModal.style.visibility = "visible";
-        successModal.classList.add("show");
-        overlay.classList.add("show");
-      }
+      const audio = document.querySelector("#correct-audio");
+      audio.play();
+      audio.addEventListener("ended", () => {
+        if (counter === textItems.length) {
+          const text = document.querySelector(".text-card .score-text");
+          text.textContent = `${counter}/${textItems.length}`;
+          text.setAttribute("text", `${counter}/${textItems.length}`);
+          successModal.style.visibility = "visible";
+          successModal.classList.add("show");
+          overlay.classList.add("show");
+          document.querySelector(`audio[id="success"]`).play();
+        }
+      });
     } else {
       document.querySelector("#wrong-audio").play();
       text.classList.add("vibrate");
@@ -154,27 +162,6 @@ cardsContainer.forEach((cardItem) => {
     }
   });
 });
-/*const addCloseAnimation = () => {
-  closeButton.classList.add("animate");
-  closeButton.addEventListener("animationend", () => {
-    closeButton.classList.remove("animate");
-  });
-  successModal.classList.add("hide");
-  successModal.style.visibility = "hidden";
-  overlay.classList.remove("show");
-};
-document.addEventListener("click", function (event) {
-  const isVisible =
-    window.getComputedStyle(successModal).visibility === "visible";
-  var isClickInside =
-    successModal.contains(event.target) || event.target === closeButton;
-  if (!isClickInside && isVisible) {
-    addCloseAnimation();
-  }
-});
-closeButton.addEventListener("click", () => {
-  addCloseAnimation();
-});*/
 const hideItems = () => {
   iconsArr.forEach((item) => {
     item.style.opacity = 0;

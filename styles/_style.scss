@@ -81,7 +81,7 @@ $width-1: 100%;
   max-height: 3rem;
   aspect-ratio: 1;
   position: relative;
-  z-index: 100;
+  z-index: 1000;
   background: linear-gradient(to bottom, $yellow-3 2%, $yellow-2);
   color: $white-1;
   font-size: 1.25rem;
@@ -143,6 +143,12 @@ $width-1: 100%;
     transform: translateY(-100%);
     transition: 0.5s;
     visibility: hidden;
+
+    .fa-solid {
+      &.hide {
+        display: none;
+      }
+    }
   }
 }
 .game {
@@ -151,16 +157,15 @@ $width-1: 100%;
   padding: $padding;
   position: relative;
   overflow-y: auto;
-  visibility: hidden;
   background-size: cover;
   background-position: 50% 100%;
+  visibility: hidden;
   transform-origin: left top;
 
   &.hideGame {
     animation-name: hideGame;
     animation-timing-function: linear;
     animation-duration: 1s;
-    animation-fill-mode: forwards;
     animation-iteration-count: 1;
   }
   .head {

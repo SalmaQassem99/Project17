@@ -34,6 +34,7 @@
         </button>
         <button class="pause icon d-flex justify-content-center align-items-center">
           <i class="fa-solid fa-pause"></i>
+          <i class="fa-solid fa-play hide"></i>
         </button>
       </div>
       <div class="scoreWrapper d-flex align-items-center">
@@ -91,7 +92,7 @@
         <i class="fa-solid fa-chevron-left"></i>
       </button>
       <div class="body-wrapper w-100 h-100 d-flex justify-content-center">
-        <!--<img src="./media/images/tom.svg" alt="character1-img" class="character-img" />-->
+        <img src="./media/images/tom.svg" alt="character1-img" class="character-img" />
         <div class="body-items d-flex flex-column align-items-center">
           <div class="cards d-flex justify-content-center align-items-center">
             <div class="cards-wrapper d-flex flex-column align-items-center">
@@ -154,7 +155,7 @@
             </div>
           </div>
         </div>
-        <!--<img src="./media/images/emy.svg" alt="character2-img" class="character-img" />-->
+        <img src="./media/images/emy.svg" alt="character2-img" class="character-img" />
       </div>
       <button class="rightButton arrow rounded-4 d-flex justify-content-center align-items-center">
         <i class="fa-solid fa-chevron-right"></i>
@@ -216,16 +217,16 @@
     successItem.addEventListener("animationend", () => {
       if (successItem.classList.contains("show")) {
         successItem.classList.remove("show");
-      }
-      else if (successItem.classList.contains("hide")) {
+      } else if (successItem.classList.contains("hide")) {
         successItem.classList.remove("hide");
         const link = document.querySelector(".link-address").textContent;
         if (link !== "") {
           gameContainer.classList.add("hideGame");
           gameContainer.addEventListener("animationend", () => {
-            gameContainer.style.visibility = "hidden";
+            gameContainer.style.transform = "scale(0)";
+            gameContainer.classList.remove("hideGame");
             window.location.href = link;
-          })
+          });
         }
       }
     });
